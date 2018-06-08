@@ -1,9 +1,9 @@
 [
   {
     "family": "Data_Modeling__Supervised_Learning",
-    "name": "Decision_Tree_Fit",
-    "label": "Decision Tree Fit",
-    "description": "Builds the decision tree model fitting the provided learning data."
+    "name": "Decision_Tree",
+    "label": "Decision Tree",
+    "description": "Decision tree model"
   },
   {
     "name": "sklearn_decision_tree_fit",
@@ -14,7 +14,7 @@
     "inputs": [
       {
         "name": "population",
-        "label": "Population",
+        "label": "Table",
         "description": "The population is defined from an object with IKATS type table.",
         "type": "table"
       }
@@ -77,7 +77,7 @@
       },
       {
         "name": "population_name",
-        "label": "Population",
+        "label": "Table",
         "description": "Name of the population to test",
         "type": "table"
       }
