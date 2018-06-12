@@ -10,7 +10,7 @@
     "label": "Decision Tree Fit",
     "description": "Builds the decision tree model fitting the provided learning data: fits a population, with the scikit-learn library",
     "algorithm": "Decision_Tree_Fit",
-    "entry_point": "ikats.algo.core.ml.supervised.sk_decision_tree::fit",
+    "entry_point": "decision_tree.sk_decision_tree::fit",
     "inputs": [
       {
         "name": "population",
@@ -67,7 +67,7 @@
     "label": "Decision Tree Predict",
     "description": "Apply a decision tree model to a testing set",
     "algorithm": "Decision_Tree_Predict",
-    "entry_point": "ikats.algo.core.ml.supervised.sk_decision_tree::predict",
+    "entry_point": "decision_tree.sk_decision_tree::predict",
     "inputs": [
       {
         "name": "sk_model",

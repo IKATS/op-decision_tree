@@ -21,7 +21,7 @@ import unittest
 
 import mock
 
-from ikats.algo.core.ml.supervised.sk_decision_tree import fit, predict
+from ikats.algo.decision_tree.sk_decision_tree import fit, predict
 from ikats.core.library.exception import IkatsNotFoundError, IkatsException
 from ikats.core.resource.api import IkatsApi
 
