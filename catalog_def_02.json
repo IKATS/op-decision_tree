@@ -1,0 +1,55 @@
+{
+  "name": "sklearn_decision_tree_predict",
+  "label": "Decision Tree Predict",
+  "description": "Apply a decision tree model to a testing set",
+  "family": "Data_Modeling__Supervised_Learning",
+  "entry_point": "decision_tree.sk_decision_tree::predict",
+  "inputs": [
+    {
+      "name": "sk_model",
+      "label": "Model",
+      "description": "Decision Tree model to use",
+      "type": "sk_model"
+    },
+    {
+      "name": "population_name",
+      "label": "Table",
+      "description": "Name of the population to test",
+      "type": "table"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "target_column_name",
+      "label": "Target",
+      "description": "The name of the attribute providing the class label of the observed subject. Must match one of the available population attributes.",
+      "type": "text"
+    },
+    {
+      "name": "identifier_column_name",
+      "label": "ID",
+      "description": "The name of the attribute identifying each observed subject. Must match one of the available population attributes.",
+      "type": "text"
+    },
+    {
+      "name": "table_name",
+      "description": "Name of the table to create",
+      "type": "text",
+      "label": "Table name"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "confusion_matrix",
+      "label": "Confusion",
+      "description": "Confusion matrix on predicted result against true reality",
+      "type": "table"
+    },
+    {
+      "name": "mean_accuracy",
+      "label": "Score",
+      "description": "Mean accuracy on the given test data and target",
+      "type": "percentage"
+    }
+  ]
+}
