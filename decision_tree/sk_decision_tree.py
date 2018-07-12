@@ -72,10 +72,12 @@ def fit(population, target_column_name, identifier_column_name, max_depth=None, 
         weight(label) = total_samples / (nb_classes * count_samples(label)).
     :type balanced_class_weight: bool
 
-    :return: tuple of results: model, dot:
-      - model: is the model computed by the internal library Scikit-learn
-      - dot: is the textual definition of the tree, based upon dot format: content parsable by graph viewers.
-    :rtype:  DecisionTreeClassifier, str
+    :return: tuple of results:
+      - TDT formatted dict
+      - model computed by the internal library Scikit-learn
+      - textual definition of the tree, based upon dot format: content parsable by graph viewers.
+    :rtype: dict, DecisionTreeClassifier, str
+
 
     :raises IkatsInputTypeError: if an argument has an unexpected type
     :raises IkatsNotFoundError: if the population cannot be found
@@ -131,6 +133,12 @@ def fit_population(population, target_column_name, identifier_column_name, max_d
 
     :param balanced_class_weight:
     :type balanced_class_weight:
+
+    :return: tuple of results:
+      - TDT formatted dict
+      - model computed by the internal library Scikit-learn
+      - textual definition of the tree, based upon dot format: content parsable by graph viewers.
+    :rtype: dict, DecisionTreeClassifier, str
 
     :raises IkatsException: error occurred.
     """

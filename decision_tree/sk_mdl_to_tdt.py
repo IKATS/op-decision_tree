@@ -19,19 +19,25 @@ import datetime
 
 def sk_mdl_to_tdt(mdl, feature_names, ls_name="No name"):
     """
-    Convert a scikit learn model into Temporal Decision Tree format
+    Convert a scikit learn DecisionTreeClassifier model into Temporal Decision Tree format
+
+    :param feature_names: Name of the various features used to fill the output format
+    :type feature_names: list
+
+    :param ls_name: Learning set name used to fill the output format
+    :type ls_name: str
 
     :param mdl: scikit learn model
-    :type: DecisionTreeClassifier
+    :type mdl: DecisionTreeClassifier
 
-    :return: TDT formatted JSON
-    :rtype: str
+    :return: TDT object JSON compatible
+    :rtype: dict
     """
 
-    # initialize the output
+    # Initialize the output
     tdt = {
         "header": {
-            "TDTFormatVersion": "2.45",
+            "TDTFormatVersion": "2.48",
             "date": str(datetime.datetime.now().strftime("%Y-%m-%d")),
             "builder": "IKATS",
             "learningSet": ls_name,
@@ -53,7 +59,6 @@ def sk_mdl_to_tdt(mdl, feature_names, ls_name="No name"):
             "description": {
                 "variable": feature_names[mdl.tree_.feature[node_id]],
                 "type": "float",
-                "unit": "",
                 "criteria": []
             }
         }
@@ -80,5 +85,4 @@ def sk_mdl_to_tdt(mdl, feature_names, ls_name="No name"):
 
         tdt['tree'].append(node)
 
-    # return mdl
     return tdt
