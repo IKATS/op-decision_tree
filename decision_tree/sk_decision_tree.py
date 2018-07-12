@@ -23,6 +23,7 @@ from sklearn.externals.six import StringIO
 from sklearn import tree
 from sklearn.metrics import confusion_matrix
 
+from ikats.algo.decision_tree.sk_mdl_to_tdt import sk_mdl_to_tdt
 from ikats.core.resource.api import IkatsApi
 from ikats.core.library.exception import IkatsException, IkatsInputTypeError, IkatsInputError
 
@@ -53,23 +54,29 @@ def fit(population, target_column_name, identifier_column_name, max_depth=None, 
         - the table object (dict)
         - otherwise its name is accepted (str)
     :type population: str or dict
+
     :param target_column_name: the name of the attribute providing the class label of the observed subject.
        Must match one of the available population attributes.
     :type target_column_name: str
+
     :param identifier_column_name: the name of the attribute identifying each observed subject.
        Must match one of the available population attributes.
     :type identifier_column_name: str
+
     :param max_depth: optional, default 0: the maximum depth of the tree. When set to 0 (default value),
                         there is no constraint on the depth.
     :type max_depth: int
+
     :param balanced_class_weight: optional, default False: when True: apply a weight balancing on the classes,
         inversely proportional to class frequencies in the input data:
         weight(label) = total_samples / (nb_classes * count_samples(label)).
     :type balanced_class_weight: bool
+
     :return: tuple of results: model, dot:
       - model: is the model computed by the internal library Scikit-learn
       - dot: is the textual definition of the tree, based upon dot format: content parsable by graph viewers.
     :rtype:  DecisionTreeClassifier, str
+
     :raises IkatsInputTypeError: if an argument has an unexpected type
     :raises IkatsNotFoundError: if the population cannot be found
     :raises IkatsException: another error occurred
@@ -112,14 +119,19 @@ def fit_population(population, target_column_name, identifier_column_name, max_d
 
     :param population: the population data whose functional type is 'table'
     :type population: dict
+
     :param target_column_name:
     :type target_column_name:
+
     :param identifier_column_name:
     :type identifier_column_name:
+
     :param max_depth:
     :type max_depth:
+
     :param balanced_class_weight:
     :type balanced_class_weight:
+
     :raises IkatsException: error occurred.
     """
 
@@ -152,7 +164,8 @@ def fit_population(population, target_column_name, identifier_column_name, max_d
         dot = dot_io.getvalue()
         LOGGER.info("  ... finished exporting the Decision Tree to dot format")
         LOGGER.info("... ended  Decision Tree Fit with scikit-learn")
-        return mdl, dot
+
+        return sk_mdl_to_tdt(mdl), dot
     except IkatsException as ike:
         raise ike
     except Exception:
