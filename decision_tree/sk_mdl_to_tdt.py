@@ -17,9 +17,7 @@ limitations under the License.
 import datetime
 
 
-def
-
-def sk_mdl_to_tdt(mdl, learning_set_name="No name"):
+def sk_mdl_to_tdt(mdl, feature_names, ls_name="No name"):
     """
     Convert a scikit learn model into Temporal Decision Tree format
 
@@ -30,4 +28,57 @@ def sk_mdl_to_tdt(mdl, learning_set_name="No name"):
     :rtype: str
     """
 
-    return mdl
+    # initialize the output
+    tdt = {
+        "header": {
+            "TDTFormatVersion": "2.45",
+            "date": str(datetime.datetime.now().strftime("%Y-%m-%d")),
+            "builder": "IKATS",
+            "learningSet": ls_name,
+            "source": "IKATS"
+        },
+        "tree": []
+    }
+
+    # Building the node list
+    for node_id in range(mdl.tree_.node_count):
+
+        # Default values for node
+        node = {
+            "node": node_id,
+            "name": feature_names[mdl.tree_.feature[node_id]],
+            "type": "variable",
+            "evaluation": [mdl.criterion, mdl.tree_.impurity[node_id]],
+            "statistics": [x for x in zip(list(mdl.classes_), list(mdl.tree_.value[node_id][0])) if x[1] != 0],
+            "description": {
+                "variable": feature_names[mdl.tree_.feature[node_id]],
+                "type": "float",
+                "unit": "",
+                "criteria": []
+            }
+        }
+
+        # children found
+        if mdl.tree_.children_left[node_id] != -1 or mdl.tree_.children_right[node_id] != -1:
+            node["description"]["criteria"].extend([{
+                "test": "<=",
+                "value": mdl.tree_.threshold[node_id],
+                "child": int(mdl.tree_.children_left[node_id])
+            }, {
+                "test": ">",
+                "value": mdl.tree_.threshold[node_id],
+                "child": int(mdl.tree_.children_right[node_id])
+            }])
+
+        # No children found
+        if len(node["description"]["criteria"]) == 0:
+            # No description to set
+            del (node["description"])
+            # The node name shall be set to the class name
+            node["name"] = node["statistics"][0][0]
+            node["type"] = "leaf"
+
+        tdt['tree'].append(node)
+
+    # return mdl
+    return tdt
