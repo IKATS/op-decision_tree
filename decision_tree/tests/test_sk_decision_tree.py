@@ -87,11 +87,11 @@ class TestSkDecisionTree(unittest.TestCase):
         Tests the nominal execution based upon mock data: IRIS data
         """
 
-        mdl, dot = fit(population="iris",
-                       target_column_name='"Species"',
-                       identifier_column_name="Id",
-                       max_depth=0,
-                       balanced_class_weight=False)
+        _, mdl, dot = fit(population="iris",
+                          target_column_name='"Species"',
+                          identifier_column_name="Id",
+                          max_depth=0,
+                          balanced_class_weight=False)
 
         # trained: 71,5.9,3.2,4.8,1.8,I. versicolor
         # => test below should obtain same class:
@@ -113,11 +113,11 @@ class TestSkDecisionTree(unittest.TestCase):
         Tests the nominal execution based upon mock data: IRIS data
         """
 
-        mdl, dot = fit(population="iris",
-                       target_column_name='"Species"',
-                       identifier_column_name="Id",
-                       max_depth=4,
-                       balanced_class_weight=True)
+        _, mdl, dot = fit(population="iris",
+                          target_column_name='"Species"',
+                          identifier_column_name="Id",
+                          max_depth=4,
+                          balanced_class_weight=True)
 
         # trained: 71,5.9,3.2,4.8,1.8,I. versicolor
         # => test below should obtain same class:
@@ -164,11 +164,11 @@ class TestSkDecisionTree(unittest.TestCase):
         tests data originated from mocked iris dataset => accuracy = 100%
         """
 
-        mdl, _ = fit(population="iris",
-                     target_column_name='"Species"',
-                     identifier_column_name="Id",
-                     max_depth=0,
-                     balanced_class_weight=False)
+        _, mdl, _ = fit(population="iris",
+                        target_column_name='"Species"',
+                        identifier_column_name="Id",
+                        max_depth=0,
+                        balanced_class_weight=False)
 
         test_table = {
             "table_desc": {},
@@ -212,11 +212,11 @@ class TestSkDecisionTree(unittest.TestCase):
         tests data altered (one record modified) => accuracy = 75%
         """
 
-        mdl, _ = fit(population="iris",
-                     target_column_name='"Species"',
-                     identifier_column_name="Id",
-                     max_depth=0,
-                     balanced_class_weight=False)
+        _, mdl, _ = fit(population="iris",
+                        target_column_name='"Species"',
+                        identifier_column_name="Id",
+                        max_depth=0,
+                        balanced_class_weight=False)
 
         test_table = {
             "table_desc": {},
