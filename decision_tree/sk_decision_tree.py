@@ -173,7 +173,7 @@ def fit_population(population, target_column_name, identifier_column_name, max_d
         LOGGER.info("  ... finished exporting the Decision Tree to dot format")
         LOGGER.info("... ended  Decision Tree Fit with scikit-learn")
 
-        return sk_mdl_to_tdt(mdl=mdl, feature_names=column_names, ls_name=population["table_desc"]["title"]), mdl, dot
+        return sk_mdl_to_tdt(mdl=mdl, feature_names=column_names, ls_name=population["table_desc"].get("title", "No title")), mdl, dot
     except IkatsException as ike:
         raise ike
     except Exception:
